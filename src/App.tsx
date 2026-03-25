@@ -29,7 +29,7 @@ export default function App() {
   });
 
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   const brideImg = images.brideUrl;
   const groomImg = images.groomUrl;
@@ -57,7 +57,7 @@ export default function App() {
               </p>
             </FadeIn>
 
-            <FadeIn delay={0.9} className="flex flex-col items-center">
+            <FadeIn delay={0.5} className="flex flex-col items-center">
               <h1 className="font-serif font-bold text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mb-4 drop-shadow-lg uppercase tracking-widest">
                 DR. POOJA PRASAD
               </h1>
@@ -72,16 +72,16 @@ export default function App() {
                 Are getting engaged
               </p>
 
-              <p className="font-serif text-[#FDF5E6] text-xl md:text-s mt-6 italic max-w-4xl mx-auto drop-shadow-md leading-relaxed px-4">
+              <p className="font-serif text-[#FDF5E6] text-lg md:text-3xl mt-8 italic max-w-5xl mx-auto drop-shadow-md leading-relaxed px-6">
                 "From Quantum States to Heartbeats — a perfect entanglement begins, join us as we celebrate our engagement"
               </p>
             </FadeIn>
 
-            <FadeIn delay={5} className="mt-15">
+            <FadeIn delay={1} className="mt-12">
               <motion.div
                 className="w-px h-24 bg-gradient-to-b from-[#E5C07B] to-transparent mx-auto mt-8 opacity-50"
                 animate={{ height: ["0px", "96px"] }}
-                transition={{ duration: 2, delay: 1.0, ease: "easeOut" }}
+                transition={{ duration: 1.2, delay: 1.0, ease: "easeOut" }}
               />
             </FadeIn>
           </motion.div>
