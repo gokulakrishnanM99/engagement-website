@@ -29,7 +29,7 @@ export default function App() {
   });
 
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
 
   const brideImg = images.brideUrl;
   const groomImg = images.groomUrl;
@@ -37,9 +37,9 @@ export default function App() {
   return (
     <div ref={containerRef} className="relative min-h-screen w-full selection:bg-[#E5C07B] selection:text-[#2D0B16]">
       <Background />
-      
+
       <main className="relative z-10 flex flex-col items-center w-full">
-        
+
         {/* Hero Section */}
         <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-20 text-center">
           <motion.div style={{ y: heroY, opacity: heroOpacity }} className="flex flex-col items-center">
@@ -56,8 +56,8 @@ export default function App() {
                 Together with their families
               </p>
             </FadeIn>
-            
-            <FadeIn delay={0.4} className="flex flex-col items-center">
+
+            <FadeIn delay={0.9} className="flex flex-col items-center">
               <h1 className="font-serif font-bold text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mb-4 drop-shadow-lg uppercase tracking-widest">
                 DR. POOJA PRASAD
               </h1>
@@ -67,19 +67,21 @@ export default function App() {
               <h1 className="font-serif font-bold text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mt-4 drop-shadow-lg uppercase tracking-widest">
                 THIRUMALAI
               </h1>
-              <p className="font-serif text-[#FDF5E6] text-xl md:text-2xl mt-8 italic max-w-2xl mx-auto drop-shadow-md">
-                From Quantum States to Heartbeats — a perfect entanglement begins, join us as we celebrate our engagement on
-              </p>
-            </FadeIn>
-            
-            <FadeIn delay={0.8} className="mt-16">
-              <p className="font-sans text-sm md:text-base tracking-[0.2em] text-[#FDF5E6]/80 uppercase">
+
+              <p className="font-sans text-[10px] md:text-xs tracking-[0.3em] text-[#E5C07B] uppercase mt-4 mb-2">
                 Are getting engaged
               </p>
-              <motion.div 
-                className="w-px h-24 bg-gradient-to-b from-[#E5C07B] to-transparent mx-auto mt-12 opacity-50"
+
+              <p className="font-serif text-[#FDF5E6] text-xl md:text-s mt-6 italic max-w-4xl mx-auto drop-shadow-md leading-relaxed px-4">
+                "From Quantum States to Heartbeats — a perfect entanglement begins, join us as we celebrate our engagement"
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={5} className="mt-15">
+              <motion.div
+                className="w-px h-24 bg-gradient-to-b from-[#E5C07B] to-transparent mx-auto mt-8 opacity-50"
                 animate={{ height: ["0px", "96px"] }}
-                transition={{ duration: 1.5, delay: 1.2, ease: "easeOut" }}
+                transition={{ duration: 2, delay: 1.0, ease: "easeOut" }}
               />
             </FadeIn>
           </motion.div>
@@ -91,9 +93,9 @@ export default function App() {
             <FadeIn>
               <div className="bg-[#1A060D]/80 backdrop-blur-2xl border border-[#E5C07B]/20 rounded-[3rem] p-8 md:p-16 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FF0055] via-[#E5C07B] to-[#00A3FF]" />
-                
+
                 <h2 className="font-serif text-4xl md:text-6xl mb-16 text-center text-[#FDF5E6] drop-shadow-md">The Engagement</h2>
-                
+
                 <div className="grid grid-cols-3 gap-2 md:gap-8 mb-12 md:mb-20">
                   <div className="flex flex-col items-center group">
                     <div className="w-12 h-12 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#E5C07B]/30 to-transparent border border-[#E5C07B]/50 flex items-center justify-center mb-3 md:mb-6 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_rgba(229,192,123,0.2)]">
@@ -110,11 +112,11 @@ export default function App() {
                     <h3 className="font-serif text-sm md:text-2xl mb-1 text-[#FDF5E6]">Time</h3>
                     <p className="font-sans text-[10px] md:text-lg text-[#FDF5E6]/90 text-center">4.00 PM - 6.00 PM</p>
                   </div>
-                  
+
                   <div className="flex flex-col items-center group">
-                    <a 
-                      href="https://maps.app.goo.gl/BAytEsapDcsy2g7K8" 
-                      target="_blank" 
+                    <a
+                      href="https://maps.app.goo.gl/BAytEsapDcsy2g7K8"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#00A3FF]/30 to-transparent border border-[#00A3FF]/50 flex items-center justify-center mb-3 md:mb-6 hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_rgba(0,163,255,0.2)] cursor-pointer"
                     >
@@ -123,9 +125,9 @@ export default function App() {
                     <h3 className="font-serif text-sm md:text-2xl mb-1 text-[#FDF5E6]">Location</h3>
                     <p className="font-sans text-[10px] md:text-lg text-[#FDF5E6]/90">JD Mahal</p>
                     <p className="font-sans text-[7px] md:text-sm text-[#FDF5E6]/60 text-center">Kovilambakkam, Chennai</p>
-                    <a 
-                      href="https://maps.app.goo.gl/BAytEsapDcsy2g7K8" 
-                      target="_blank" 
+                    <a
+                      href="https://maps.app.goo.gl/BAytEsapDcsy2g7K8"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="mt-3 md:mt-6 inline-flex items-center gap-1 px-3 py-1 md:px-6 md:py-2 bg-[#FDF5E6]/10 border border-[#00A3FF]/50 text-[#00A3FF] hover:bg-[#00A3FF] hover:text-[#2D0B16] transition-all duration-300 rounded-full font-sans text-[8px] md:text-xs tracking-widest uppercase shadow-[0_0_10px_rgba(0,163,255,0.2)]"
                     >
@@ -146,21 +148,21 @@ export default function App() {
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-24">
             <FadeIn className="w-full md:w-1/2 flex justify-center md:justify-end">
               <div className="relative w-48 h-48 md:w-80 md:h-80 flex items-center justify-center">
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-[#FF0055]/20 rounded-full filter blur-xl"
                   animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <motion.div 
+                <motion.div
                   className="w-32 h-32 md:w-60 md:h-60 rounded-2xl md:rounded-3xl overflow-hidden border-2 md:border-4 border-[#FF0055]/40 shadow-[0_0_20px_rgba(255,0,85,0.2)] relative z-10"
                   animate={{ y: [0, -10, 0], rotate: [3, 5, 3] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <img src={brideImg} alt="Pooja" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </motion.div>
-                <motion.div 
-                  className="absolute top-4 right-4 md:top-10 md:right-10 text-[#FF0055] z-20 drop-shadow-[0_0_10px_rgba(255,0,85,0.8)]" 
-                  animate={{ y: [0, -10, 0] }} 
+                <motion.div
+                  className="absolute top-4 right-4 md:top-10 md:right-10 text-[#FF0055] z-20 drop-shadow-[0_0_10px_rgba(255,0,85,0.8)]"
+                  animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <Heart className="w-5 h-5 md:w-8 md:h-8 fill-current" />
@@ -172,7 +174,7 @@ export default function App() {
               <p className="font-sans text-sm md:text-lg text-[#FF0055] mb-1 md:mb-2 drop-shadow-[0_0_10px_rgba(255,0,85,0.4)]">MD (Anaesthesia) at AIIMS</p>
               <p className="font-sans text-[10px] md:text-sm text-[#FDF5E6]/70 uppercase tracking-wider">MBBS</p>
               <p className="mt-4 md:mt-6 font-serif text-sm md:text-lg text-[#FDF5E6]/90 leading-relaxed max-w-md mx-auto md:mx-0">
-                Dedicated to healing and care, bringing warmth and precision to every heartbeat, ready to start a beautiful new chapter.
+                Among countless heartbeats, she found the one worth caring for—forever.
               </p>
             </FadeIn>
           </div>
@@ -181,21 +183,21 @@ export default function App() {
           <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-24">
             <FadeIn className="w-full md:w-1/2 flex justify-center md:justify-start">
               <div className="relative w-48 h-48 md:w-80 md:h-80 flex items-center justify-center">
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-[#00A3FF]/20 rounded-full filter blur-xl"
                   animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <motion.div 
+                <motion.div
                   className="w-32 h-32 md:w-60 md:h-60 rounded-2xl md:rounded-3xl overflow-hidden border-2 md:border-4 border-[#00A3FF]/40 shadow-[0_0_20px_rgba(0,163,255,0.2)] relative z-10"
                   animate={{ y: [0, -10, 0], rotate: [-3, -5, -3] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <img src={groomImg} alt="Thirumalai" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </motion.div>
-                <motion.div 
-                  className="absolute top-4 left-4 md:top-10 md:left-10 text-[#00A3FF] z-20 drop-shadow-[0_0_10px_rgba(0,163,255,0.8)]" 
-                  animate={{ y: [0, -10, 0] }} 
+                <motion.div
+                  className="absolute top-4 left-4 md:top-10 md:left-10 text-[#00A3FF] z-20 drop-shadow-[0_0_10px_rgba(0,163,255,0.8)]"
+                  animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 2.5, repeat: Infinity }}
                 >
                   <Atom className="w-5 h-5 md:w-8 md:h-8" />
@@ -207,7 +209,7 @@ export default function App() {
               <p className="font-sans text-sm md:text-lg text-[#00A3FF] mb-1 md:mb-2 drop-shadow-[0_0_10px_rgba(0,163,255,0.4)]">Quantum Engineer at QpiAI</p>
               <p className="font-sans text-[10px] md:text-sm text-[#FDF5E6]/70 uppercase tracking-wider">MTech at IIT Jodhpur</p>
               <p className="mt-4 md:mt-6 font-serif text-sm md:text-lg text-[#FDF5E6]/90 leading-relaxed max-w-md mx-auto md:mx-0 md:ml-auto">
-                One unstable qubit found it maximally entagled pair      Exploring the fundamental nature of reality, now embarking on a lifelong entanglement with his perfect match.
+                One highly unstable qubit found its perfectly entangled pair, collapsing into certainty
               </p>
             </FadeIn>
           </div>
