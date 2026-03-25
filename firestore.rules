@@ -1,0 +1,51 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: polls
+// Document ID: engagement
+// Fields:
+//   - brideVotes: number (required) - Total votes for the bride
+//   - groomVotes: number (required) - Total votes for the groom
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidPoll(data) {
+      return data.brideVotes is int && data.brideVotes >= 0 &&
+             data.groomVotes is int && data.groomVotes >= 0;
+    }
+
+    match /polls/engagement {
+      // Anyone can read the results
+      allow read: if true;
+      
+      // Allow public creation and updates for this specific poll
+      allow create: if isValidPoll(request.resource.data) && hasOnlyAllowedFields(['brideVotes', 'groomVotes']);
+      
+      allow update: if isValidPoll(request.resource.data) &&
+                    hasOnlyAllowedFields(['brideVotes', 'groomVotes']) &&
+                    (
+                      (request.resource.data.brideVotes == resource.data.brideVotes + 1 && request.resource.data.groomVotes == resource.data.groomVotes) ||
+                      (request.resource.data.groomVotes == resource.data.groomVotes + 1 && request.resource.data.brideVotes == resource.data.brideVotes)
+                    );
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -28,8 +28,8 @@ export default function App() {
     offset: ["start start", "end end"]
   });
 
-  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
   const brideImg = images.brideUrl;
   const groomImg = images.groomUrl;
@@ -44,33 +44,30 @@ export default function App() {
         <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-20 text-center">
           <motion.div style={{ y: heroY, opacity: heroOpacity }} className="flex flex-col items-center">
             <FadeIn delay={0.1}>
-              <div className="w-16 h-16 mb-8 mx-auto">
-                <svg viewBox="0 0 100 100" className="w-full h-full fill-[#E5C07B]">
-                  <path d="M50 10 C30 10 20 30 20 50 C20 70 30 90 50 90 C70 90 80 70 80 50 C80 30 70 10 50 10 M50 25 C60 25 65 35 65 45 C65 55 60 65 50 65 C40 65 35 55 35 45 C35 35 40 25 50 25" />
-                  <circle cx="50" cy="45" r="5" />
-                </svg>
+              <div className="w-16 h-16 mb-8 mx-auto flex items-center justify-center">
+                <Heart className="w-full h-full text-[#E5C07B] fill-[#E5C07B]/20 drop-shadow-[0_0_15px_rgba(229,192,123,0.5)]" />
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p className="font-tamil text-[#E5C07B] text-sm md:text-base tracking-widest mb-4 uppercase drop-shadow-[0_0_10px_rgba(229,192,123,0.3)]">
                 நிச்சயதார்த்த அழைப்பிதழ்
               </p>
-              <p className="font-serif text-[#FDF5E6]/80 text-lg md:text-xl mb-8 italic">
+              <p className="font-serif text-[#FDF5E6] text-xl md:text-2xl mb-8 italic drop-shadow-md">
                 Together with their families
               </p>
             </FadeIn>
             
             <FadeIn delay={0.4} className="flex flex-col items-center">
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mb-4 drop-shadow-lg uppercase tracking-widest">
+              <h1 className="font-serif font-bold text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mb-4 drop-shadow-lg uppercase tracking-widest">
                 DR. POOJA PRASAD
               </h1>
-              <span className="font-serif text-4xl md:text-6xl text-[#E5C07B] italic my-2 drop-shadow-md">
+              <span className="font-serif font-bold text-4xl md:text-6xl text-[#E5C07B] italic my-2 drop-shadow-md">
                 &
               </span>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mt-4 drop-shadow-lg uppercase tracking-widest">
+              <h1 className="font-serif font-bold text-5xl md:text-7xl lg:text-8xl text-[#FDF5E6] leading-none mt-4 drop-shadow-lg uppercase tracking-widest">
                 THIRUMALAI
               </h1>
-              <p className="font-serif text-[#FDF5E6]/80 text-lg md:text-xl mt-8 italic max-w-2xl mx-auto">
+              <p className="font-serif text-[#FDF5E6] text-xl md:text-2xl mt-8 italic max-w-2xl mx-auto drop-shadow-md">
                 From Quantum States to Heartbeats — a perfect entanglement begins, join us as we celebrate our engagement on
               </p>
             </FadeIn>
@@ -210,7 +207,7 @@ export default function App() {
               <p className="font-sans text-sm md:text-lg text-[#00A3FF] mb-1 md:mb-2 drop-shadow-[0_0_10px_rgba(0,163,255,0.4)]">Quantum Engineer at QpiAI</p>
               <p className="font-sans text-[10px] md:text-sm text-[#FDF5E6]/70 uppercase tracking-wider">MTech at IIT Jodhpur</p>
               <p className="mt-4 md:mt-6 font-serif text-sm md:text-lg text-[#FDF5E6]/90 leading-relaxed max-w-md mx-auto md:mx-0 md:ml-auto">
-                Exploring the fundamental nature of reality, now embarking on a lifelong entanglement with his perfect match.
+                One unstable qubit found it maximally entagled pair      Exploring the fundamental nature of reality, now embarking on a lifelong entanglement with his perfect match.
               </p>
             </FadeIn>
           </div>

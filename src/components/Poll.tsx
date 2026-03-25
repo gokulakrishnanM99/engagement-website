@@ -1,56 +1,99 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useWeddingImages } from '../hooks/useWeddingImages';
+import { db, handleFirestoreError, OperationType, ensureAuth } from '../firebase';
+import { doc, onSnapshot, updateDoc, increment, setDoc, getDoc } from 'firebase/firestore';
 
 export function Poll() {
-  const [brideVotes, setBrideVotes] = useState(142);
-  const [groomVotes, setGroomVotes] = useState(138);
+  const [brideVotes, setBrideVotes] = useState(0);
+  const [groomVotes, setGroomVotes] = useState(0);
   const [hasVoted, setHasVoted] = useState(false);
   const [voteSide, setVoteSide] = useState<'bride' | 'groom' | null>(null);
   const [showPlusOne, setShowPlusOne] = useState<'bride' | 'groom' | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { images } = useWeddingImages();
 
-  // Placeholder images that will be replaced by generated ones if available
   const brideImg = images.brideUrl;
   const groomImg = images.groomUrl;
 
   useEffect(() => {
-    const localBride = localStorage.getItem('brideVotes');
-    const localGroom = localStorage.getItem('groomVotes');
-    const localVoted = localStorage.getItem('hasVoted');
-    if (localBride) setBrideVotes(parseInt(localBride));
-    if (localGroom) setGroomVotes(parseInt(localGroom));
+    const pollDocRef = doc(db, 'polls', 'engagement');
+    
+    // Check if user has already voted in this browser
+    const localVoted = localStorage.getItem('hasVoted_engagement');
     if (localVoted === 'true') {
       setHasVoted(true);
-      setVoteSide(localStorage.getItem('voteSide') as any);
+      setVoteSide(localStorage.getItem('voteSide_engagement') as any);
     }
+
+    // Real-time listener for global votes
+    const unsubscribe = onSnapshot(pollDocRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.data();
+        setBrideVotes(data.brideVotes || 0);
+        setGroomVotes(data.groomVotes || 0);
+      } else {
+        // Initialize document if it doesn't exist
+        // Note: This might fail if rules are strict, but we handle it
+        console.log("Initializing poll document...");
+      }
+      setIsLoading(false);
+    }, (error) => {
+      handleFirestoreError(error, OperationType.GET, 'polls/engagement');
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  const handleVote = (side: 'bride' | 'groom') => {
+  const handleVote = async (side: 'bride' | 'groom') => {
     if (hasVoted) return;
     
-    const newBrideVotes = side === 'bride' ? brideVotes + 1 : brideVotes;
-    const newGroomVotes = side === 'groom' ? groomVotes + 1 : groomVotes;
-    
-    setBrideVotes(newBrideVotes);
-    setGroomVotes(newGroomVotes);
-    setHasVoted(true);
-    setVoteSide(side);
-    setShowPlusOne(side);
-    
-    setTimeout(() => {
-      setShowPlusOne(null);
-    }, 1500);
-    
-    localStorage.setItem('brideVotes', newBrideVotes.toString());
-    localStorage.setItem('groomVotes', newGroomVotes.toString());
-    localStorage.setItem('hasVoted', 'true');
-    localStorage.setItem('voteSide', side);
+    try {
+      const pollDocRef = doc(db, 'polls', 'engagement');
+      
+      // Check if doc exists first, if not create it (first vote ever)
+      const snap = await getDoc(pollDocRef);
+      if (!snap.exists()) {
+        await setDoc(pollDocRef, {
+          brideVotes: side === 'bride' ? 1 : 0,
+          groomVotes: side === 'groom' ? 1 : 0
+        });
+      } else {
+        await updateDoc(pollDocRef, {
+          [side === 'bride' ? 'brideVotes' : 'groomVotes']: increment(1)
+        });
+      }
+
+      setHasVoted(true);
+      setVoteSide(side);
+      setShowPlusOne(side);
+      
+      setTimeout(() => {
+        setShowPlusOne(null);
+      }, 1500);
+      
+      localStorage.setItem('hasVoted_engagement', 'true');
+      localStorage.setItem('voteSide_engagement', side);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.WRITE, 'polls/engagement');
+    }
   };
 
   const total = brideVotes + groomVotes;
-  const bridePercent = Math.round((brideVotes / total) * 100);
+  const bridePercent = total === 0 ? 50 : Math.round((brideVotes / total) * 100);
   const groomPercent = 100 - bridePercent;
+
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-4xl mx-auto h-64 flex items-center justify-center">
+        <motion.div 
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-[#E5C07B] border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-4xl mx-auto bg-[#1A060D]/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-[#E5C07B]/20 relative overflow-hidden">

@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "Poll": {
+      "title": "Poll",
+      "description": "Global poll results for bride and groom",
+      "type": "object",
+      "properties": {
+        "brideVotes": {
+          "type": "integer",
+          "description": "Total votes for the bride"
+        },
+        "groomVotes": {
+          "type": "integer",
+          "description": "Total votes for the groom"
+        }
+      },
+      "required": ["brideVotes", "groomVotes"]
+    }
+  },
+  "firestore": {
+    "polls/engagement": {
+      "schema": "Poll",
+      "description": "The main engagement poll document"
+    }
+  }
+}

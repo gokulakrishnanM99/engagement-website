@@ -28,9 +28,9 @@ export function Background() {
 
       <FloatingShapes />
       
-      <ZhaElement className="absolute top-[20%] right-[15%] text-[#E5C07B] opacity-30" delay={0} />
-      <EcgHeartElement className="absolute bottom-[20%] left-[10%] w-48 h-48 text-[#FF0055] opacity-40" delay={5} />
-      <QuantumElement className="absolute top-[60%] right-[20%] w-32 h-32 text-[#00A3FF] opacity-40" delay={2} />
+      <ZhaElement className="absolute top-[15%] md:top-[20%] right-[10%] md:right-[15%] text-[#E5C07B] opacity-30" delay={0} />
+      <EcgHeartElement className="absolute bottom-[10%] md:bottom-[20%] left-[5%] md:left-[10%] w-32 h-32 md:w-48 md:h-48 text-[#FF0055] opacity-40" delay={5} />
+      <QuantumElement className="absolute top-[75%] md:top-[60%] right-[5%] md:right-[20%] w-24 h-24 md:w-32 md:h-32 text-[#00A3FF] opacity-40" delay={2} />
     </div>
   );
 }
